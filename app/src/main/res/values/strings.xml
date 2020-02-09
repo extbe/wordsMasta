@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Words Masta</string>
+    <string name="title_activity_import_data">ImportDataActivity</string>
+    <string name="import_data_caption">Please, select a file to import data</string>
+    <string name="choose_file_button">Choose file</string>
+    <string name="open_import_data_activity_btn">Import data</string>
+    <string name="open_words_learning_activity_btn">Learn words</string>
+    <string name="importStatusLabel">Import status:</string>
+    <string name="title_activity_words_learning_preparation">WordsLearningPreparationActivity
+    </string>
+    <string name="choseSourceLangCodeLabel">From language:</string>
+    <string name="choseTargetLangCodeLabel" >To language:</string>
+</resources>
