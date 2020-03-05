@@ -11,8 +11,9 @@ interface WordDao {
     @Query(
         "SELECT w.value as sourceValue, t.value AS translation " +
                 "FROM words w " +
-                "INNER JOIN translations tr ON w.id = tr.source_word_id " +
-                "INNER JOIN words t ON tr.target_word_id = t.id " +
+                "LEFT JOIN translations tr1 ON w.id = tr1.source_word_id " +
+                "LEFT JOIN translations tr2 ON w.id = tr2.target_word_id " +
+                "INNER JOIN words t ON tr1.target_word_id = t.id OR tr2.source_word_id = t.id " +
                 "WHERE w.language_id = :sourceLangId " +
                 "AND t.language_id = :targetLangId " +
                 "ORDER BY RANDOM() " +
