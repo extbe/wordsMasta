@@ -8,12 +8,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Observer
 import by.extbe.wordsmasta.R
 import by.extbe.wordsmasta.constant.DEFAULT_SOURCE_LANGUAGE
 import by.extbe.wordsmasta.constant.DEFAULT_TARGET_LANGUAGE
 import by.extbe.wordsmasta.viewmodel.WordsLearningViewModel
-import kotlinx.android.synthetic.main.activity_words_learning.*
 
 class WordsLearningActivity : AppCompatActivity() {
     companion object {
@@ -26,7 +26,7 @@ class WordsLearningActivity : AppCompatActivity() {
     private val choiceButtons = mutableListOf<Button>()
 
     private lateinit var wordForTranslation: TextView
-    private lateinit var buttonsView: LinearLayout
+    private lateinit var activityLayout: ConstraintLayout
 
     private var wordChosen = false
 
@@ -45,8 +45,8 @@ class WordsLearningActivity : AppCompatActivity() {
         initializeChoiceButton(R.id.button4, onTranslationChosenListener)
 
         wordForTranslation = findViewById(R.id.sourceWord)
-        buttonsView = findViewById(R.id.translationButtons)
-        buttonsView.setOnClickListener {
+        activityLayout = findViewById(R.id.wordsLearningActivityRootLayout)
+        activityLayout.setOnClickListener {
             if (wordChosen) viewModel.fetchNextWord()
         }
 
@@ -69,7 +69,7 @@ class WordsLearningActivity : AppCompatActivity() {
     inner class WordChosenListener : View.OnClickListener {
         override fun onClick(v: View?) {
             if (wordChosen) {
-                buttonsView.performClick()
+                activityLayout.performClick()
                 return
             }
             val translation = viewModel.wordForTranslation.value!!.translation
