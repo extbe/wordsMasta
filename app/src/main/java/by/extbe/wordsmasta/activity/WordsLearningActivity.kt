@@ -4,7 +4,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +12,7 @@ import androidx.lifecycle.Observer
 import by.extbe.wordsmasta.R
 import by.extbe.wordsmasta.constant.DEFAULT_SOURCE_LANGUAGE
 import by.extbe.wordsmasta.constant.DEFAULT_TARGET_LANGUAGE
+import by.extbe.wordsmasta.constant.DEFAULT_WORD_GROUP
 import by.extbe.wordsmasta.viewmodel.WordsLearningViewModel
 
 class WordsLearningActivity : AppCompatActivity() {
@@ -34,9 +34,10 @@ class WordsLearningActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_words_learning)
 
-        val sourceLangCode = intent.getStringExtra(SOURCE_LANGUAGE) ?: DEFAULT_SOURCE_LANGUAGE.title
-        val targetLangCode = intent.getStringExtra(TARGET_LANGUAGE) ?: DEFAULT_TARGET_LANGUAGE.title
-        viewModel.initContext(sourceLangCode, targetLangCode)
+        val sourceLangName = intent.getStringExtra(SOURCE_LANGUAGE) ?: DEFAULT_SOURCE_LANGUAGE.title
+        val targetLangName = intent.getStringExtra(TARGET_LANGUAGE) ?: DEFAULT_TARGET_LANGUAGE.title
+        val wordGroupName = intent.getStringExtra(WORD_GROUP) ?: DEFAULT_WORD_GROUP.title
+        viewModel.initContext(sourceLangName, targetLangName, wordGroupName)
 
         val onTranslationChosenListener = WordChosenListener()
         initializeChoiceButton(R.id.button1, onTranslationChosenListener)

@@ -12,26 +12,30 @@ import kotlinx.coroutines.launch
 class WordsLearningViewModel(application: Application) : AndroidViewModel(application) {
     private var sourceLangId: Long? = null
     private var targetLangId: Long? = null
+    private var wordGroupId: Long? = null
 
     private lateinit var wordService: WordService
 
     val wordForTranslation = MutableLiveData<WordForTranslation>()
 
-    fun initContext(sourceLangCode: String, targetLangCode: String) = viewModelScope.launch {
-        val db = WordsMastaDatabase.getDatabase(getApplication())
-        wordService = WordService(db.wordDao(), db.languageDao(), db.translationDao())
+    fun initContext(sourceLangName: String, targetLangName: String, wordGroupName: String) =
+        viewModelScope.launch {
+            val db = WordsMastaDatabase.getDatabase(getApplication())
+            wordService = WordService(db)
 
-        sourceLangCode.let { sourceLangId = wordService.getLanguageIdByName(it) }
-        targetLangCode.let { targetLangId = wordService.getLanguageIdByName(it) }
+            sourceLangId = wordService.getLanguageIdByName(sourceLangName)
+            targetLangId = wordService.getLanguageIdByName(targetLangName)
+            wordGroupId = wordService.getGroupIdByName(wordGroupName)
 
-        retrieveNextWordForTranslation()
-    }
+            retrieveNextWordForTranslation()
+        }
 
     fun fetchNextWord() = viewModelScope.launch {
         retrieveNextWordForTranslation()
     }
 
     private suspend fun retrieveNextWordForTranslation() {
-        wordForTranslation.value = wordService.getWordForTranslation(sourceLangId!!, targetLangId!!)
+        wordForTranslation.value =
+            wordService.getWordForTranslation(sourceLangId!!, targetLangId!!, wordGroupId!!)
     }
 }

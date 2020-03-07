@@ -14,6 +14,7 @@ import by.extbe.wordsmasta.viewmodel.WordsLearningPreparationViewModel
 class WordsLearningPreparationActivity : AppCompatActivity() {
     private lateinit var sourceLangsSpinner: Spinner
     private lateinit var targetLangsSpinner: Spinner
+    private lateinit var wordsGroupSpinner: Spinner
 
     private val viewModel: WordsLearningPreparationViewModel by viewModels()
 
@@ -23,16 +24,22 @@ class WordsLearningPreparationActivity : AppCompatActivity() {
 
         sourceLangsSpinner = findViewById(R.id.sourceLanguageCode)
         targetLangsSpinner = findViewById(R.id.targetLanguageCode)
+        wordsGroupSpinner = findViewById(R.id.wordsGroup)
 
         viewModel.languageNames.observe(this, Observer {
             fillSpinnerWithValues(it.toTypedArray(), sourceLangsSpinner)
             sourceLangsSpinner.onItemSelectedListener = OnSourceLanguageSelectedListener()
         })
 
+        viewModel.wordGroups.observe(this, Observer {
+            fillSpinnerWithValues(it.toTypedArray(), wordsGroupSpinner)
+        })
+
         findViewById<Button>(R.id.startWordsLearningBtn)?.setOnClickListener {
             val intent = Intent(this, WordsLearningActivity::class.java)
             intent.putExtra(SOURCE_LANGUAGE, sourceLangsSpinner.selectedItem.toString())
             intent.putExtra(TARGET_LANGUAGE, targetLangsSpinner.selectedItem.toString())
+            intent.putExtra(WORD_GROUP, wordsGroupSpinner.selectedItem.toString())
             startActivity(intent)
         }
     }

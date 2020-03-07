@@ -10,4 +10,5 @@
     </string>
     <string name="choseSourceLangCodeLabel">From language:</string>
     <string name="choseTargetLangCodeLabel" >To language:</string>
+    <string name="wordsGroupLabel">Words group</string>
 </resources>

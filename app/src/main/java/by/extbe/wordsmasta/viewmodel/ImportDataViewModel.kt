@@ -36,7 +36,7 @@ class ImportDataViewModel(application: Application) : AndroidViewModel(applicati
         }
         viewModelScope.launch {
             val db = WordsMastaDatabase.getDatabase(getApplication())
-            val wordService = WordService(db.wordDao(), db.languageDao(), db.translationDao())
+            val wordService = WordService(db)
             wordService.saveWords(words, sourceLangCode, targetLangCode)
             importStatus.value = ImportStatus.COMPLETED
         }

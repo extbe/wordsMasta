@@ -5,22 +5,30 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import by.extbe.wordsmasta.constant.RequiredLanguage
-import by.extbe.wordsmasta.persistence.dao.LanguageDao
-import by.extbe.wordsmasta.persistence.dao.TranslationDao
-import by.extbe.wordsmasta.persistence.dao.WordDao
-import by.extbe.wordsmasta.persistence.entity.Language
-import by.extbe.wordsmasta.persistence.entity.Translation
-import by.extbe.wordsmasta.persistence.entity.Word
+import by.extbe.wordsmasta.constant.DefaultGroup
+import by.extbe.wordsmasta.constant.DefaultLanguage
+import by.extbe.wordsmasta.persistence.dao.*
+import by.extbe.wordsmasta.persistence.entity.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-@Database(version = 1, entities = [Word::class, Translation::class, Language::class])
+@Database(
+    version = 1,
+    entities = [
+        Word::class,
+        Translation::class,
+        Language::class,
+        Group::class,
+        WordGroup::class
+    ]
+)
 abstract class WordsMastaDatabase : RoomDatabase() {
     abstract fun wordDao(): WordDao
     abstract fun languageDao(): LanguageDao
     abstract fun translationDao(): TranslationDao
+    abstract fun groupDao(): GroupDao
+    abstract fun wordGroupDao(): WordGroupDao
 
     companion object {
         @Volatile
@@ -41,20 +49,30 @@ abstract class WordsMastaDatabase : RoomDatabase() {
                         context.applicationContext,
                         WordsMastaDatabase::class.java,
                         "words_masta_database"
-                    ).addCallback(object : Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            GlobalScope.launch(Dispatchers.IO) {
-                                val requiredLanguages = RequiredLanguage.values()
-                                    .asSequence()
-                                    .map { Language(it.title, it.code) }
-                                    .toList()
-                                getDatabase(context).languageDao().insertAll(requiredLanguages)
-                            }
-                        }
-                    }).build()
+                    ).addCallback(FillDatabaseWithDefaultDataCallback(context)).build()
                     instance!!
                 }
+            }
+        }
+    }
+
+    class FillDatabaseWithDefaultDataCallback(private val context: Context) :
+        RoomDatabase.Callback() {
+
+        override fun onCreate(db: SupportSQLiteDatabase) {
+            super.onCreate(db)
+            GlobalScope.launch(Dispatchers.IO) {
+                val defaultLanguages = DefaultLanguage.values()
+                    .asSequence()
+                    .map { Language(it.title, it.code) }
+                    .toList()
+                val database = getDatabase(context)
+                database.languageDao().insertAll(defaultLanguages)
+                val defaultGroups = DefaultGroup.values()
+                    .asSequence()
+                    .map { Group(it.title) }
+                    .toList()
+                database.groupDao().insertAll(defaultGroups)
             }
         }
     }

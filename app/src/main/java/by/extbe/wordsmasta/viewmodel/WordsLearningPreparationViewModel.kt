@@ -9,12 +9,20 @@ import kotlinx.coroutines.launch
 
 class WordsLearningPreparationViewModel(application: Application) : AndroidViewModel(application) {
     val languageNames = MutableLiveData<List<String>>()
+    val wordGroups = MutableLiveData<List<String>>()
 
     init {
         viewModelScope.launch {
-            languageNames.value = WordsMastaDatabase.getDatabase(application)
-                .languageDao()
-                .getAllNames()
+            val database = WordsMastaDatabase.getDatabase(application)
+            launch {
+                languageNames.value = database.languageDao()
+                    .getAllNames()
+            }
+            launch {
+                wordGroups.value = database.wordGroupDao()
+                    .getAllGroupsThatHaveWords()
+                    .map { it.name }
+            }
         }
     }
 
