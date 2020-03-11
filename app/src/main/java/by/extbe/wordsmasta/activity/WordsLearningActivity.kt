@@ -76,12 +76,12 @@ class WordsLearningActivity : AppCompatActivity() {
             val translation = viewModel.wordForTranslation.value!!.translation
             val pressedBtn = v as Button
             if (pressedBtn.text == translation) {
-                pressedBtn.setBackgroundColor(CORRECT_CHOICE_BUTTON_COLOR)
+                viewModel.fetchNextWord()
             } else {
+                wordChosen = true
                 pressedBtn.setBackgroundColor(INCORRECT_CHOICE_BUTTON_COLOR)
                 highlightCorrectTranslation(translation)
             }
-            wordChosen = true
         }
 
         private fun highlightCorrectTranslation(translation: String) {
