@@ -14,6 +14,11 @@ interface WordGroupDao {
     @Insert
     suspend fun insertMany(wordGroups: List<WordGroup>)
 
-    @Query("SELECT DISTINCT g.* FROM groups g, word_groups wg WHERE g.id = wg.group_id")
+    @Query(
+        "SELECT DISTINCT g.* " +
+                "FROM groups g, word_groups wg " +
+                "WHERE g.id = wg.group_id " +
+                "ORDER BY g.name"
+    )
     suspend fun getAllGroupsThatHaveWords(): List<Group>
 }

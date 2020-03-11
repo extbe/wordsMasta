@@ -13,6 +13,6 @@ interface GroupDao {
     @Insert
     suspend fun insertAll(groups: List<Group>)
 
-    @Query("SELECT id FROM groups WHERE name = :name")
+    @Query("SELECT id FROM groups WHERE name = :name ORDER BY name")
     suspend fun selectIdByName(name: String): Long?
 }
