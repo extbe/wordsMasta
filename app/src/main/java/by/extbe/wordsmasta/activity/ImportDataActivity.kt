@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_import_data.*
 class ImportDataActivity : AppCompatActivity() {
     private companion object {
         const val READ_FILE_REQUEST_CODE = 42
-        const val MIME_TYPE_TEXT_PLAIN = "text/plain"
+        const val MIME_TYPE_TEXT_PLAIN = "*/*"
     }
 
     private val importDataViewModel: ImportDataViewModel by viewModels()

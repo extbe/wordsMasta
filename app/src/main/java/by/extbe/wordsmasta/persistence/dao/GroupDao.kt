@@ -8,6 +8,9 @@ import by.extbe.wordsmasta.persistence.entity.Group
 @Dao
 interface GroupDao {
     @Insert
+    suspend fun insertOne(group: Group): Long
+
+    @Insert
     suspend fun insertAll(groups: List<Group>)
 
     @Query("SELECT id FROM groups WHERE name = :name")
