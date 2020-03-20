@@ -40,17 +40,18 @@ class WordService(db: WordsMastaDatabase) {
             val targetLangId = getLanguageIdByCode(wordGroupDto.targetLanguageCode)
 
             for ((word, translation) in wordGroupDto.words) {
-                val wordId = wordDao.insertOne(Word(sourceLangId, word))
-                val translationId = wordDao.insertOne(Word(targetLangId, translation))
-                translationDao.insertOne(Translation(wordId, translationId))
-                wordGroupDao.insertMany(
-                    listOf(
-                        WordGroup(wordId, allWordsGroupId),
-                        WordGroup(wordId, wordGroupId),
-                        WordGroup(translationId, allWordsGroupId),
-                        WordGroup(translationId, wordGroupId)
-                    )
-                )
+                val wordId = getOrCreateWord(sourceLangId, word)
+                val translationId = getOrCreateWord(targetLangId, translation)
+                createTranslationIfNotExists(wordId, translationId)
+                val notExistingGroups = listOf(
+                    WordGroup(wordId, allWordsGroupId),
+                    WordGroup(wordId, wordGroupId),
+                    WordGroup(translationId, allWordsGroupId),
+                    WordGroup(translationId, wordGroupId)
+                ).filter { wordGroupDao.existsByWordIdAndGroupId(it.wordId, it.groupId) == null }
+                if (notExistingGroups.isNotEmpty()) {
+                    wordGroupDao.insertMany(notExistingGroups)
+                }
             }
         }
     }
@@ -60,6 +61,16 @@ class WordService(db: WordsMastaDatabase) {
 
     suspend fun getGroupIdByName(name: String) =
         findGroupIdByName(name) ?: error("Group with name [$name] not found")
+
+    private suspend fun getOrCreateWord(languageId: Long, value: String): Long {
+        return wordDao.selectIdByLanguageIdAndValue(languageId, value)
+            ?: wordDao.insertOne(Word(languageId, value))
+    }
+
+    private suspend fun createTranslationIfNotExists(wordId: Long, translationId: Long) {
+        translationDao.selectBySourceAndTargetIds(wordId, translationId)
+            ?: translationDao.insertOne(Translation(wordId, translationId))
+    }
 
     private suspend fun findGroupIdByName(name: String): Long? = groupDao.selectIdByName(name)
 
@@ -73,7 +84,7 @@ class WordService(db: WordsMastaDatabase) {
         targetLangId: Long,
         wordGroupId: Long
     ): WordForTranslation {
-        val words = wordDao.getNRandomWordsWithTranslation(
+        val words = wordDao.selectNRandomWordsWithTranslation(
             sourceLangId,
             targetLangId,
             wordGroupId,

@@ -21,4 +21,7 @@ interface WordGroupDao {
                 "ORDER BY g.name"
     )
     suspend fun getAllGroupsThatHaveWords(): List<Group>
+
+    @Query("SELECT 1 FROM word_groups WHERE word_id = :wordId AND group_id = :groupId")
+    suspend fun existsByWordIdAndGroupId(wordId: Long, groupId: Long): Int?
 }

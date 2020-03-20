@@ -21,12 +21,15 @@ interface WordDao {
                 "ORDER BY RANDOM() " +
                 "LIMIT :limit"
     )
-    suspend fun getNRandomWordsWithTranslation(
+    suspend fun selectNRandomWordsWithTranslation(
         sourceLangId: Long,
         targetLangId: Long,
         wordGroupId: Long,
         limit: Int
     ): List<WordWithTranslation>
+
+    @Query("SELECT id FROM words WHERE language_id = :languageId AND value = :value")
+    suspend fun selectIdByLanguageIdAndValue(languageId: Long, value: String): Long?
 
     @Insert
     suspend fun insertOne(word: Word): Long
