@@ -5,16 +5,18 @@
     android:id="@+id/wordsLearningActivityRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_long"
     tools:context=".activity.WordsLearningActivity">
 
     <TextView
         android:id="@+id/sourceWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="148dp"
+        android:fontFamily="@font/roboto_bold"
         android:textAlignment="center"
-        android:textColor="#202020"
-        android:textSize="18sp"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -25,38 +27,56 @@
         android:id="@+id/translationButtons"
         android:layout_width="361dp"
         android:layout_height="267dp"
-        android:layout_marginBottom="60dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.838">
 
         <Button
             android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/word_btn_margin_bottom"
-            android:textAllCaps="false" />
+            android:background="@drawable/wm_button"
+            android:fontFamily="@font/roboto_bold"
+            android:textAllCaps="false"
+            android:textColor="@color/defaultTextColor"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/word_btn_margin_bottom"
-            android:textAllCaps="false" />
+            android:background="@drawable/wm_button"
+            android:fontFamily="@font/roboto_bold"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/word_btn_margin_bottom"
-            android:textAllCaps="false" />
+            android:background="@drawable/wm_button"
+            android:fontFamily="@font/roboto_bold"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAllCaps="false" />
+            android:background="@drawable/wm_button"
+            android:fontFamily="@font/roboto_bold"
+            android:textAllCaps="false"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

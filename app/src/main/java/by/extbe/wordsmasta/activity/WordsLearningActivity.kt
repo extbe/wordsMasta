@@ -1,6 +1,7 @@
 package by.extbe.wordsmasta.activity
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -16,23 +17,26 @@ import by.extbe.wordsmasta.constant.DEFAULT_WORD_GROUP
 import by.extbe.wordsmasta.viewmodel.WordsLearningViewModel
 
 class WordsLearningActivity : AppCompatActivity() {
-    companion object {
-        const val DEFAULT_CHOICE_BUTTON_COLOR = Color.GRAY
-        const val CORRECT_CHOICE_BUTTON_COLOR = Color.GREEN
-        const val INCORRECT_CHOICE_BUTTON_COLOR = Color.RED
-    }
-
     private val viewModel: WordsLearningViewModel by viewModels()
     private val choiceButtons = mutableListOf<Button>()
 
+    private lateinit var defaultChoiceBtnBg: Drawable
+    private lateinit var successChoiceBtnBg: Drawable
+    private lateinit var errorChoiceBtnBg: Drawable
     private lateinit var wordForTranslation: TextView
     private lateinit var activityLayout: ConstraintLayout
 
     private var wordChosen = false
+    private var defaultChoiceBtnTextColor = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_words_learning)
+
+        defaultChoiceBtnBg = getDrawable(R.drawable.wm_button)!!
+        successChoiceBtnBg = getDrawable(R.drawable.wm_button_success)!!
+        errorChoiceBtnBg = getDrawable(R.drawable.wm_button_error)!!
+        defaultChoiceBtnTextColor = getColor(R.color.defaultTextColor)
 
         val sourceLangName = intent.getStringExtra(SOURCE_LANGUAGE) ?: DEFAULT_SOURCE_LANGUAGE.title
         val targetLangName = intent.getStringExtra(TARGET_LANGUAGE) ?: DEFAULT_TARGET_LANGUAGE.title
@@ -55,7 +59,8 @@ class WordsLearningActivity : AppCompatActivity() {
             wordForTranslation.text = it.word
             for ((buttonPosition, choiceButton) in choiceButtons.withIndex()) {
                 choiceButton.text = it.translationChoices[buttonPosition]
-                choiceButton.setBackgroundColor(DEFAULT_CHOICE_BUTTON_COLOR)
+                choiceButton.background = defaultChoiceBtnBg
+                choiceButton.setTextColor(defaultChoiceBtnTextColor)
             }
             wordChosen = false
         })
@@ -79,14 +84,18 @@ class WordsLearningActivity : AppCompatActivity() {
                 viewModel.fetchNextWord()
             } else {
                 wordChosen = true
-                pressedBtn.setBackgroundColor(INCORRECT_CHOICE_BUTTON_COLOR)
+                pressedBtn.background = errorChoiceBtnBg
+                pressedBtn.setTextColor(Color.WHITE)
                 highlightCorrectTranslation(translation)
             }
         }
 
         private fun highlightCorrectTranslation(translation: String) {
             choiceButtons.find { it.text == translation }
-                ?.setBackgroundColor(CORRECT_CHOICE_BUTTON_COLOR)
+                ?.let {
+                    it.background = successChoiceBtnBg
+                    it.setTextColor(Color.WHITE)
+                }
         }
     }
 }
