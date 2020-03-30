@@ -1,5 +1,5 @@
 # wordsMasta
-A simple flash cards like application written for fun and with intention to practice Kotlin.
+A simple flashcards like application written for fun and with intention to practice Kotlin.
 
 ## Functionality
 The application contains a little of available functions:
