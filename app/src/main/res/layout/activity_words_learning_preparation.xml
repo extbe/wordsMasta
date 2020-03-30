@@ -5,84 +5,118 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_short"
     tools:context=".activity.WordsLearningPreparationActivity">
 
-    <EditText
-        android:id="@+id/sourceLanguageCodeLabel"
-        android:layout_width="136dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="72dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/choseSourceLangCodeLabel"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/customizeParams"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/wordsGroupLabel"
-        android:layout_width="122dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="44dp"
+    <TextView
+        android:id="@+id/sourceLanguageCodeLabel"
+        android:layout_width="125dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/wordsGroupLabel"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/choseSourceLangCodeLabel"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/targetLanguageCode" />
-
-    <Spinner
-        android:id="@+id/targetLanguageCode"
-        android:layout_width="204dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/targetLanguageCodeLabel" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <Spinner
         android:id="@+id/sourceLanguageCode"
         android:layout_width="204dp"
-        android:layout_height="44dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/spinner_bg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.452"
+        app:layout_constraintStart_toEndOf="@+id/sourceLanguageCodeLabel"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/targetLanguageCodeLabel"
+        android:layout_width="104dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/choseTargetLangCodeLabel"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sourceLanguageCodeLabel" />
 
-    <EditText
-        android:id="@+id/targetLanguageCodeLabel"
-        android:layout_width="126dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="44dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/choseTargetLangCodeLabel"
-        app:layout_constraintStart_toStartOf="parent"
+    <Spinner
+        android:id="@+id/targetLanguageCode"
+        android:layout_width="204dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="36dp"
+        android:background="@drawable/spinner_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintStart_toEndOf="@+id/targetLanguageCodeLabel"
         app:layout_constraintTop_toBottomOf="@+id/sourceLanguageCode" />
 
-    <Button
-        android:id="@+id/startWordsLearningBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/open_words_learning_activity_btn"
+    <TextView
+        android:id="@+id/wordsGroupLabel"
+        android:layout_width="106dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/wordsGroupLabel"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wordsGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/targetLanguageCodeLabel" />
 
     <Spinner
         android:id="@+id/wordsGroup"
-        android:layout_width="333dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="345dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/spinner_bg"
+        android:popupBackground="@drawable/spinner_popup_bg"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.424"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wordsGroupLabel" />
+
+    <Button
+        android:id="@+id/startWordsLearningBtn"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/wm_button"
+        android:fontFamily="@font/roboto_bold"
+        android:text="@string/letsGo"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

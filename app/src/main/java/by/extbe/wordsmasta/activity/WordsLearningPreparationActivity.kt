@@ -45,7 +45,8 @@ class WordsLearningPreparationActivity : AppCompatActivity() {
     }
 
     private fun fillSpinnerWithValues(values: Array<String>, spinner: Spinner) {
-        ArrayAdapter(baseContext, android.R.layout.simple_spinner_item, values).also {
+        ArrayAdapter(baseContext, R.layout.spinner_active_item, values).also {
+            it.setDropDownViewResource(R.layout.spinner_popup_item)
             spinner.adapter = it
         }
     }

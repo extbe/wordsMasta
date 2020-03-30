@@ -8,9 +8,11 @@
     <string name="importStatusLabel">Import status:</string>
     <string name="title_activity_words_learning_preparation">WordsLearningPreparationActivity
     </string>
-    <string name="choseSourceLangCodeLabel">From language:</string>
-    <string name="choseTargetLangCodeLabel" >To language:</string>
+    <string name="choseSourceLangCodeLabel">From language</string>
+    <string name="choseTargetLangCodeLabel" >To language</string>
     <string name="wordsGroupLabel">Words group</string>
     <string name="project_name">Words Masta</string>
     <string name="app_slogan">learn words with ease</string>
+    <string name="letsGo">Let\'s GO!</string>
+    <string name="customizeParams">Customize parameters</string>
 </resources>
