@@ -9,8 +9,8 @@
 
     <ImageButton
         android:id="@+id/exitButton"
-        android:layout_width="62dp"
-        android:layout_height="55dp"
+        android:layout_width="48dp"
+        android:layout_height="45dp"
         android:adjustViewBounds="false"
         android:backgroundTint="#00FFFFFF"
         android:contentDescription="@string/exit"
