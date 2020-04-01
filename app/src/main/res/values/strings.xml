@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Words Masta</string>
     <string name="title_activity_import_data">ImportDataActivity</string>
-    <string name="import_data_caption">Please, select a file to import data</string>
-    <string name="choose_file_button">Choose file</string>
+    <string name="import_data_caption">Select a file to import</string>
+    <string name="choose_file_button">Click to select</string>
     <string name="open_import_data_activity_btn">Import words</string>
     <string name="open_words_learning_activity_btn">Learn words</string>
     <string name="importStatusLabel">Import status:</string>

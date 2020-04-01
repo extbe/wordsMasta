@@ -22,9 +22,19 @@ class ImportDataActivity : AppCompatActivity() {
 
     private val importDataViewModel: ImportDataViewModel by viewModels()
 
+    private var defaultTextColor = 0
+    private var successColor = 0
+    private var errorColor = 0
+    private var inProgressColor = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_import_data)
+
+        defaultTextColor = getColor(R.color.defaultTextColor)
+        successColor = getColor(R.color.colorSuccess)
+        errorColor = getColor(R.color.colorError)
+        inProgressColor = getColor(R.color.colorInProgress)
 
         findViewById<Button>(R.id.choseFileForImportBtn).setOnClickListener {
             val openFileIntent = Intent(Intent.ACTION_GET_CONTENT)
@@ -36,8 +46,17 @@ class ImportDataActivity : AppCompatActivity() {
         val importStatus = findViewById<TextView>(R.id.importStatus)
         importDataViewModel.importStatus.observe(this, Observer {
             importStatus.text = it.description
+            importStatus.setTextColor(determineImportStatusColor(it))
         })
     }
+
+    private fun determineImportStatusColor(importStatus: ImportStatus): Int =
+        when (importStatus) {
+            ImportStatus.NO_DATA -> defaultTextColor
+            ImportStatus.IN_PROGRESS -> inProgressColor
+            ImportStatus.COMPLETED -> successColor
+            ImportStatus.ERROR -> errorColor
+        }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)

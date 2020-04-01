@@ -16,7 +16,7 @@ val DEFAULT_WORD_GROUP = DefaultGroup.ALL_WORDS
 
 enum class ImportStatus(val description: String) {
     NO_DATA("No data to import"),
-    IN_PROGRESS("Import in progress"),
-    COMPLETED("Import completed"),
-    ERROR("Import error")
+    IN_PROGRESS("In progress"),
+    COMPLETED("Completed"),
+    ERROR("Error")
 }

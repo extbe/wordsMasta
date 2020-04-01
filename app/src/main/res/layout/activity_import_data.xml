@@ -4,43 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_medium"
     tools:context=".activity.ImportDataActivity">
 
-    <EditText
+    <TextView
         android:id="@+id/importCaption"
-        android:layout_width="281dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="72dp"
-        android:ems="10"
-        android:hint="@string/import_data_caption"
-        android:inputType="textPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:fontFamily="@font/roboto_bold"
         android:text="@string/import_data_caption"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/choseFileForImportBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="49dp"
+        android:layout_marginBottom="120dp"
+        android:background="@drawable/wm_button"
+        android:fontFamily="@font/roboto_bold"
         android:text="@string/choose_file_button"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/importCaption"
-        app:layout_constraintVertical_bias="0.317" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/importStatusLabel"
-        android:layout_width="123dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="36dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="84dp"
+        android:fontFamily="@font/roboto_bold"
         android:text="@string/importStatusLabel"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/importCaption" />
 
@@ -48,6 +54,11 @@
         android:id="@+id/importStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/defaultTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/importStatusLabel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
