@@ -8,6 +8,19 @@
     android:background="@drawable/background_long"
     tools:context=".activity.WordsLearningActivity">
 
+    <ImageButton
+        android:id="@+id/goBackButton"
+        android:layout_width="62dp"
+        android:layout_height="55dp"
+        android:adjustViewBounds="false"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/go_back"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_back" />
+
     <TextView
         android:id="@+id/sourceWord"
         android:layout_width="wrap_content"

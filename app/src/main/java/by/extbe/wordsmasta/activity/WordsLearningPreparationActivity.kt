@@ -42,6 +42,8 @@ class WordsLearningPreparationActivity : AppCompatActivity() {
             intent.putExtra(WORD_GROUP, wordsGroupSpinner.selectedItem.toString())
             startActivity(intent)
         }
+
+        findViewById<ImageButton>(R.id.goBackButton).setOnClickListener { finish() }
     }
 
     private fun fillSpinnerWithValues(values: Array<String>, spinner: Spinner) {

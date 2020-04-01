@@ -7,6 +7,19 @@
     android:background="@drawable/background"
     tools:context=".activity.MainActivity">
 
+    <ImageButton
+        android:id="@+id/exitButton"
+        android:layout_width="62dp"
+        android:layout_height="55dp"
+        android:adjustViewBounds="false"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/exit"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/exit" />
+
     <Button
         android:id="@+id/importDataBtn"
         android:layout_width="260dp"

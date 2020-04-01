@@ -66,4 +66,17 @@
         app:layout_constraintTop_toTopOf="@+id/importStatusLabel"
         app:layout_constraintVertical_bias="0.461" />
 
+    <ImageButton
+        android:id="@+id/goBackButton"
+        android:layout_width="62dp"
+        android:layout_height="55dp"
+        android:adjustViewBounds="false"
+        android:backgroundTint="#00FFFFFF"
+        android:contentDescription="@string/go_back"
+        android:cropToPadding="false"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/arrow_back" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

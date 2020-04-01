@@ -15,4 +15,6 @@
     <string name="app_slogan">learn words with ease</string>
     <string name="letsGo">Let\'s GO!</string>
     <string name="customizeParams">Customize parameters</string>
+    <string name="go_back">Go back</string>
+    <string name="exit">Exit</string>
 </resources>

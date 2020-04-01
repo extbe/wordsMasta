@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -42,6 +43,8 @@ class ImportDataActivity : AppCompatActivity() {
             openFileIntent.type = MIME_TYPE_TEXT_PLAIN
             startActivityForResult(openFileIntent, READ_FILE_REQUEST_CODE)
         }
+
+        findViewById<ImageButton>(R.id.goBackButton).setOnClickListener { finish() }
 
         val importStatus = findViewById<TextView>(R.id.importStatus)
         importDataViewModel.importStatus.observe(this, Observer {

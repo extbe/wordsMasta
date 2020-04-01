@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -37,6 +38,8 @@ class WordsLearningActivity : AppCompatActivity() {
         successChoiceBtnBg = getDrawable(R.drawable.wm_button_success)!!
         errorChoiceBtnBg = getDrawable(R.drawable.wm_button_error)!!
         defaultChoiceBtnTextColor = getColor(R.color.defaultTextColor)
+
+        findViewById<ImageButton>(R.id.goBackButton).setOnClickListener { finish() }
 
         val sourceLangName = intent.getStringExtra(SOURCE_LANGUAGE) ?: DEFAULT_SOURCE_LANGUAGE.title
         val targetLangName = intent.getStringExtra(TARGET_LANGUAGE) ?: DEFAULT_TARGET_LANGUAGE.title

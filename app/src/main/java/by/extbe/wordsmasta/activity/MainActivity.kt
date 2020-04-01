@@ -3,6 +3,7 @@ package by.extbe.wordsmasta.activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import by.extbe.wordsmasta.R
 import by.extbe.wordsmasta.persistence.WordsMastaDatabase
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, WordsLearningPreparationActivity::class.java)
             startActivity(intent)
         }
+
+        findViewById<ImageButton>(R.id.exitButton).setOnClickListener { finish() }
 
         invokeRoomOnCreatedLifecycleListener()
     }
