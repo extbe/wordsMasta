@@ -1,5 +1,6 @@
 package by.extbe.wordsmasta.service
 
+import androidx.lifecycle.MutableLiveData
 import by.extbe.wordsmasta.constant.DefaultGroup
 import by.extbe.wordsmasta.dto.WordForTranslation
 import by.extbe.wordsmasta.dto.WordGroupsImportDto
@@ -8,6 +9,8 @@ import by.extbe.wordsmasta.persistence.entity.Group
 import by.extbe.wordsmasta.persistence.entity.Translation
 import by.extbe.wordsmasta.persistence.entity.Word
 import by.extbe.wordsmasta.persistence.entity.WordGroup
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.yield
 import org.yaml.snakeyaml.Yaml
 import org.yaml.snakeyaml.constructor.Constructor
 import java.io.InputStream
@@ -24,13 +27,25 @@ class WordService(db: WordsMastaDatabase) {
         const val WORD_FOR_TRANSLATION_POSITION = 0
     }
 
-    suspend fun importFromFile(fileIn: InputStream) {
+    suspend fun importFromFile(
+        fileIn: InputStream,
+        importCounter: MutableLiveData<Int>,
+        totalCounter: MutableLiveData<Int>
+    ) {
         val yaml = Yaml(Constructor(WordGroupsImportDto::class.java))
         val wordGroupsImportDto = fileIn.use { yaml.load(it) as WordGroupsImportDto }
 
         if (wordGroupsImportDto.groups.isEmpty()) {
             return
         }
+
+        importCounter.value = 0
+
+        var wordsTotal = 0
+        wordGroupsImportDto.groups.forEach { wordGroup ->
+            wordsTotal += wordGroup.words.size
+        }
+        totalCounter.value = wordsTotal
 
         val allWordsGroupId = getGroupIdByName(DefaultGroup.ALL_WORDS.title)
         for (wordGroupDto in wordGroupsImportDto.groups) {
@@ -52,6 +67,9 @@ class WordService(db: WordsMastaDatabase) {
                 if (notExistingGroups.isNotEmpty()) {
                     wordGroupDao.insertMany(notExistingGroups)
                 }
+                importCounter.value = importCounter.value!! + 1
+                delay(50L)
+                yield()
             }
         }
     }

@@ -7,5 +7,5 @@
     <color name="defaultTextColor">#222222</color>
     <color name="colorError">#D15757</color>
     <color name="colorSuccess">#03A12F</color>
-    <color name="colorInProgress">#2D5D8A</color>
+    <color name="colorInProgress">#67BFF1</color>
 </resources>

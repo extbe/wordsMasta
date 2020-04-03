@@ -3,9 +3,12 @@ package by.extbe.wordsmasta.activity
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -47,9 +50,20 @@ class ImportDataActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.goBackButton).setOnClickListener { finish() }
 
         val importStatus = findViewById<TextView>(R.id.importStatus)
+        val importProgressBar = findViewById<ProgressBar>(R.id.importProgressBar)
         importDataViewModel.importStatus.observe(this, Observer {
             importStatus.text = it.description
-            importStatus.setTextColor(determineImportStatusColor(it))
+            val importStatusColor = determineImportStatusColor(it)
+            importStatus.setTextColor(importStatusColor)
+            importProgressBar.progressDrawable.colorFilter =
+                PorterDuffColorFilter(importStatusColor, PorterDuff.Mode.SRC_IN)
+        })
+
+        importDataViewModel.totalCounter.observe(this, Observer {
+            importProgressBar.max = it
+        })
+        importDataViewModel.importCounter.observe(this, Observer {
+            importProgressBar.progress = it
         })
     }
 

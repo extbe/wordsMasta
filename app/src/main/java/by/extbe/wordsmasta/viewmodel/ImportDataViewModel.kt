@@ -11,7 +11,9 @@ import by.extbe.wordsmasta.service.WordService
 import kotlinx.coroutines.launch
 
 class ImportDataViewModel(application: Application) : AndroidViewModel(application) {
-    var importStatus = MutableLiveData(ImportStatus.NO_DATA)
+    val importStatus = MutableLiveData(ImportStatus.NO_DATA)
+    val importCounter = MutableLiveData<Int>()
+    val totalCounter = MutableLiveData<Int>()
 
     fun importWordsFromFile(fileUri: Uri) {
         importStatus.value = ImportStatus.IN_PROGRESS
@@ -21,7 +23,7 @@ class ImportDataViewModel(application: Application) : AndroidViewModel(applicati
             viewModelScope.launch {
                 val db = WordsMastaDatabase.getDatabase(getApplication())
                 val wordService = WordService(db)
-                wordService.importFromFile(it)
+                wordService.importFromFile(it, importCounter, totalCounter)
                 importStatus.value = ImportStatus.COMPLETED
             }
         }
