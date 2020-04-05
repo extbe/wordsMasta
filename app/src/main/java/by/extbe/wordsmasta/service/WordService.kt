@@ -27,6 +27,7 @@ class WordService(db: WordsMastaDatabase) {
         const val WORD_FOR_TRANSLATION_POSITION = 0
     }
 
+    // todo: split
     suspend fun importFromFile(
         fileIn: InputStream,
         importCounter: MutableLiveData<Int>,
@@ -68,7 +69,6 @@ class WordService(db: WordsMastaDatabase) {
                     wordGroupDao.insertMany(notExistingGroups)
                 }
                 importCounter.value = importCounter.value!! + 1
-                delay(50L)
                 yield()
             }
         }

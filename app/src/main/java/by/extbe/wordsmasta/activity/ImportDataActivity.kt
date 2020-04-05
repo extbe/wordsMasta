@@ -3,8 +3,6 @@ package by.extbe.wordsmasta.activity
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -53,10 +51,7 @@ class ImportDataActivity : AppCompatActivity() {
         val importProgressBar = findViewById<ProgressBar>(R.id.importProgressBar)
         importDataViewModel.importStatus.observe(this, Observer {
             importStatus.text = it.description
-            val importStatusColor = determineImportStatusColor(it)
-            importStatus.setTextColor(importStatusColor)
-            importProgressBar.progressDrawable.colorFilter =
-                PorterDuffColorFilter(importStatusColor, PorterDuff.Mode.SRC_IN)
+            importStatus.setTextColor(determineImportStatusColor(it))
         })
 
         importDataViewModel.totalCounter.observe(this, Observer {

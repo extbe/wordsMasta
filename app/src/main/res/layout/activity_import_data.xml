@@ -29,6 +29,7 @@
         android:background="@drawable/wm_button"
         android:fontFamily="@font/roboto_bold"
         android:text="@string/choose_file_button"
+        android:textAllCaps="false"
         android:textColor="@color/defaultTextColor"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -82,6 +83,7 @@
     <ProgressBar
         android:id="@+id/importProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
+        android:progressDrawable="@drawable/progress_bar"
         android:layout_width="336dp"
         android:layout_height="18dp"
         android:layout_marginTop="44dp"
