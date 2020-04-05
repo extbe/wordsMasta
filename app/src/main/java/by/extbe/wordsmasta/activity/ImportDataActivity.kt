@@ -38,7 +38,8 @@ class ImportDataActivity : AppCompatActivity() {
         errorColor = getColor(R.color.colorError)
         inProgressColor = getColor(R.color.colorInProgress)
 
-        findViewById<Button>(R.id.choseFileForImportBtn).setOnClickListener {
+        val choseFileBtn = findViewById<Button>(R.id.choseFileForImportBtn)
+        choseFileBtn.setOnClickListener {
             val openFileIntent = Intent(Intent.ACTION_GET_CONTENT)
             openFileIntent.addCategory(Intent.CATEGORY_OPENABLE)
             openFileIntent.type = MIME_TYPE_TEXT_PLAIN
@@ -50,6 +51,7 @@ class ImportDataActivity : AppCompatActivity() {
         val importStatus = findViewById<TextView>(R.id.importStatus)
         val importProgressBar = findViewById<ProgressBar>(R.id.importProgressBar)
         importDataViewModel.importStatus.observe(this, Observer {
+            choseFileBtn.isEnabled = it != ImportStatus.IN_PROGRESS
             importStatus.text = it.description
             importStatus.setTextColor(determineImportStatusColor(it))
         })

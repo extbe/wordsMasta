@@ -23,6 +23,7 @@
 
     <Button
         android:id="@+id/choseFileForImportBtn"
+        style="@style/buttonStyle"
         android:layout_width="260dp"
         android:layout_height="49dp"
         android:layout_marginBottom="120dp"
