@@ -1,3 +1,5 @@
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=extbe_wordsMasta&metric=alert_status)](https://sonarcloud.io/dashboard?id=extbe_wordsMasta)
+
 # wordsMasta
 A simple flashcards like application written for fun and with intention to practice Kotlin.
 
